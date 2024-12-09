@@ -19,6 +19,18 @@ pub fn load_input(file_path: &str) -> (Vec<i32>, Vec<i32>) {
     (input_1, input_2)
 }
 
+pub fn load_matrix(file_path: &str) -> Vec<Vec<i32>> {
+    let mut result = Vec::new();
+    if let Ok(lines) = read_lines(file_path) {
+        for line in lines.flatten() {
+            let split: Vec<i32> = line.split_whitespace().map(|str| str.parse::<i32>().unwrap()).collect();
+            result.push(split);
+        }
+    }
+    
+    result
+}
+
 pub fn read_lines<P>(filename: P) -> io::Result<io::Lines<BufReader<File>>>
 where P: AsRef<Path>, {
     let file = File::open(filename)?;
